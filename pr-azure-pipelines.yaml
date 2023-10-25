@@ -10,7 +10,7 @@ name: $(version).$(Build.BuildId)$(buildPipelineSuffix)
 pr:
   branches:
     include:
-    - master  # '*'' must single quote since "*" is a YAML reserved character; we want a string
+      - master  # '*'' must single quote since "*" is a YAML reserved character; we want a string
 
 pool:
   vmImage: ubuntu-latest
@@ -116,10 +116,10 @@ steps:
 
   - task: ArtifactoryXrayScan@1
     inputs:
-      artifactoryService: 'girocicd.npm.remote.jfrog.io'
+      artifactoryService: 'girocicd.jfrog.io'
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
-      allowFailBuild: true
+      allowFailBuild: false
 
   - task: ArchiveFiles@2
     condition: always()
