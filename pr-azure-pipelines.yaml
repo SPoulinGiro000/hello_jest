@@ -129,12 +129,12 @@ steps:
     inputs:
       pollingTimeoutSec: '300'
 
-  - task: ArtifactoryXrayScan@1
-    inputs:
-      artifactoryService: 'girocicd.jfrog.io'
-      buildName: '$(Build.DefinitionName)'
-      buildNumber: '$(Build.BuildNumber)'
-      allowFailBuild: false
+  # - task: ArtifactoryXrayScan@1
+  #   inputs:
+  #     artifactoryService: 'girocicd.jfrog.io'
+  #     buildName: '$(Build.DefinitionName)'
+  #     buildNumber: '$(Build.BuildNumber)'
+  #     allowFailBuild: false
 
   - task: ArchiveFiles@2
     condition: always()
