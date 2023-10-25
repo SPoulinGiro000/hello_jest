@@ -5,12 +5,12 @@
 
 name: $(version).$(Build.BuildId)$(buildPipelineSuffix)
 
-# trigger:
+trigger: none
 # - master
-pr:
-  branches:
-    include:
-      - master  # '*'' must single quote since "*" is a YAML reserved character; we want a string
+# pr:
+#   branches:
+#     include:
+#       - master  # '*'' must single quote since "*" is a YAML reserved character; we want a string
 
 pool:
   vmImage: ubuntu-latest
