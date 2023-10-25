@@ -47,6 +47,7 @@ steps:
   #     buildName: '$(Build.DefinitionName)'
   #     buildNumber: '$(Build.BuildNumber)'
   - script: |
+      npm install --global http-server
       npm install
     displayName: 'npm install'
 
