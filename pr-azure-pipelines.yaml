@@ -25,17 +25,17 @@ steps:
       versionSpec: '10.x'
     displayName: 'Install Node.js'
 
-  - task: JFrogNpm@1
-    inputs:
-      command: 'install'
-      artifactoryConnection: 'girocicd.jfrog.io.v2.basicauth'
-      sourceRepo: 'dailyweb-npm'
-      workingFolder: '/'
-      arguments: 'mynpmargs'
-      collectBuildInfo: true
-      threads: '1'
-      buildName: '$(Build.DefinitionName)'
-      buildNumber: '$(Build.BuildNumber)'
+  # - task: JFrogNpm@1
+  #   inputs:
+  #     command: 'install'
+  #     artifactoryConnection: 'girocicd.jfrog.io.v2.basicauth'
+  #     sourceRepo: 'dailyweb-npm'
+  #     workingFolder: '/'
+  #     arguments: 'mynpmargs'
+  #     collectBuildInfo: true
+  #     threads: '1'
+  #     buildName: '$(Build.DefinitionName)'
+  #     buildNumber: '$(Build.BuildNumber)'
   # - task: ArtifactoryNpm@2
   #   inputs:
   #     command: 'install'
@@ -46,9 +46,9 @@ steps:
   #     threads: '1'
   #     buildName: '$(Build.DefinitionName)'
   #     buildNumber: '$(Build.BuildNumber)'
-  # - script: |
-  #     npm install
-  #   displayName: 'npm install'
+  - script: |
+      npm install
+    displayName: 'npm install'
 
   # - task: JFrogNpm@1
   #   inputs:
@@ -105,13 +105,6 @@ steps:
       ls -la
     displayName: 'npm build'
 
-  - task: ArtifactoryXrayScan@1
-    inputs:
-      artifactoryService: 'girocicd.npm.remote.jfrog.io'
-      buildName: '$(Build.DefinitionName)'
-      buildNumber: '$(Build.BuildNumber)'
-      allowFailBuild: true
-
   - script: |
       npm run test
       ls -la
@@ -120,6 +113,13 @@ steps:
   - task: SonarCloudPublish@1
     inputs:
       pollingTimeoutSec: '300'
+
+  - task: ArtifactoryXrayScan@1
+    inputs:
+      artifactoryService: 'girocicd.npm.remote.jfrog.io'
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+      allowFailBuild: true
 
   - task: ArchiveFiles@2
     condition: always()
