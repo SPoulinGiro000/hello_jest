@@ -28,7 +28,7 @@ steps:
   - task: JFrogNpm@1
     inputs:
       command: 'install'
-      artifactoryConnection: 'girocicd.jfrog.io.v2'
+      artifactoryConnection: 'girocicd.jfrog.io.v2.basicauth'
       sourceRepo: 'dailyweb-npm'
       workingFolder: '/'
       arguments: 'mynpmargs'
